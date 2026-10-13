@@ -1,0 +1,32 @@
+@model WebApplication5.Models.ContactUs
+
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "contact-form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, "Full Name")
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter your full name" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, "Email Address")
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email address", type = "email" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Subject, "Subject")
+        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "What is this about?" })
+        @Html.ValidationMessageFor(m => m.Subject)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Message, "Message")
+        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", placeholder = "Please enter your message here..." })
+        @Html.ValidationMessageFor(m => m.Message)
+    </div>
+
+    <button type="submit" class="btn-submit">Send Message</button>
+}

@@ -1,0 +1,53 @@
+@model WebApplication5.Models.StudentFeedbackModel
+
+@{
+    ViewBag.Title = "Student Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Student Feedback Form</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <p>
+        @Html.LabelFor(m => m.StudentName)<br />
+        @Html.TextBoxFor(m => m.StudentName)
+        @Html.ValidationMessageFor(m => m.StudentName, "", new { @class = "text-danger" })
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Email)<br />
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Course)<br />
+        @Html.TextBoxFor(m => m.Course)
+        @Html.ValidationMessageFor(m => m.Course, "", new { @class = "text-danger" })
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.FeedbackText)<br />
+        @Html.TextAreaFor(m => m.FeedbackText, 4, 35, null)
+        @Html.ValidationMessageFor(m => m.FeedbackText, "", new { @class = "text-danger" })
+    </p>
+
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+}
+
+@if (ViewBag.IsSubmitted == true)
+{
+    <hr />
+    <h3>Submitted Details:</h3>
+    <p><strong>Student Name:</strong> @ViewBag.StudentName</p>
+    <p><strong>Email:</strong> @ViewBag.Email</p>
+    <p><strong>Course:</strong> @ViewBag.Course</p>
+    <p><strong>Feedback:</strong> @ViewBag.FeedbackText</p>
+}

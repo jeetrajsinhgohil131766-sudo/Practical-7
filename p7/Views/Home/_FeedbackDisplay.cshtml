@@ -1,0 +1,71 @@
+@if (TempData["StudentName"] != null)
+{
+    var studentName = TempData["StudentName"] ?? "";
+    var email = TempData["Email"] ?? "";
+    var feedback = TempData["Feedback"] ?? "";
+    var rating = TempData["Rating"] ?? 0;
+
+    <div class="feedback-display">
+        <h3>✓ Thank You! Your Feedback Has Been Submitted Successfully</h3>
+
+        <div class="feedback-item">
+            <div class="feedback-label">Student Name</div>
+            <div class="feedback-value">@studentName</div>
+        </div>
+
+        <div class="feedback-item">
+            <div class="feedback-label">Email Address</div>
+            <div class="feedback-value">@email</div>
+        </div>
+
+        <div class="feedback-item">
+            <div class="feedback-label">Feedback Received</div>
+            <div class="feedback-value">@feedback</div>
+        </div>
+
+        <div class="feedback-item">
+            <div class="feedback-label">Rating</div>
+            <div class="rating-display">
+                <span class="stars">
+                    @{
+                        int ratingInt = (int)rating;
+                        for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= ratingInt)
+                            {
+                                <text>★</text>
+                            }
+                            else
+                            {
+                                <span style="color: #ccc;">★</span>
+                            }
+                        }
+                    }
+                </span>
+                <span class="rating-text">@rating/5 - @GetRatingLabel((int)rating)</span>
+            </div>
+        </div>
+    </div>
+}
+
+@functions {
+    string GetRatingLabel(int rating)
+    {
+        switch (rating)
+        {
+            case 1:
+                return "Poor";
+            case 2:
+                return "Fair";
+            case 3:
+                return "Good";
+            case 4:
+                return "Very Good";
+            case 5:
+                return "Excellent";
+            default:
+                return "";
+        }
+    }
+}
+
